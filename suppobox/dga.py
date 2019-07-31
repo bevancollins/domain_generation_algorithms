@@ -1,3 +1,4 @@
+# coding=utf-8
 """
     generate domains according to: 
     - https://www.endgame.com/blog/malware-with-a-personal-touch.html
