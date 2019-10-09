@@ -26,7 +26,7 @@ def get_words(wordlist):
     with open(wordlist, 'r') as r:
         return [w.strip() for w in r if w.strip()]
 
-def dga(date, wordlist):
+def dga(date, wordlist, nr):
     words = get_words(wordlist)
     diff = date - datetime.strptime("2015-01-01", "%Y-%m-%d")
     days_passed = (diff.days // seeds[wordlist]['div'])
@@ -34,7 +34,7 @@ def dga(date, wordlist):
     seed = (flag << 16) + days_passed - 306607824
     r = Rand(seed) 
 
-    for i in range(12):
+    for i in range(nr):
         r.rand()
         v = r.rand()
         length = v % 12 + 12
@@ -51,16 +51,17 @@ def dga(date, wordlist):
         yield domain
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="gozi dga")
+    parser = argparse.ArgumentParser()
     parser.add_argument("-d", "--date", 
             help="date for which to generate domains")
     parser.add_argument("-w", "--wordlist", help="wordlist", 
             choices=seeds.keys(), default='luther')
+    parser.add_argument("-n", "--nr", type=int, default=12, help="number of domains")
     args = parser.parse_args()
     if args.date:
         d = datetime.strptime(args.date, "%Y-%m-%d")
     else:
         d = datetime.now()
 
-    for domain in dga(d, args.wordlist):
+    for domain in dga(d, args.wordlist, args.nr):
         print(domain)

@@ -2,10 +2,10 @@ import argparse
 from ctypes import c_int
 from datetime import datetime
 
-def dga(date, magic, tlds):
+def dga(date, magic, tlds, nr):
 #    tlds = ["eu", "biz", "se", "info", "com", "net", "org", "ru", "in", 
 #            "name"]
-    for i in range(10):
+    for i in range(nr):
         for tld in tlds:
             seed_string = '.'.join([str(s) for s in 
                     [magic, date.month, date.day, date.year, tld]])
@@ -35,9 +35,10 @@ if __name__=="__main__":
             default="prospect")
     parser.add_argument("-t", "--tlds", nargs="+", help="tlds",
         default=["eu", "biz", "se", "info", "com", "net", "org", "ru", "in", "name"])
+    parser.add_argument("-n", "--nr", type=int, default=10, help="number of domains")
     args = parser.parse_args()
     if args.date:
         d = datetime.strptime(args.date, "%Y-%m-%d")
     else:
         d = datetime.now()
-    dga(d, args.magic, args.tlds)
+    dga(d, args.magic, args.tlds, args.nr)

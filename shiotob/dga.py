@@ -49,9 +49,10 @@ if __name__=="__main__":
     """ example seed domain: 4ypv1eehphg3a.com """
     parser = argparse.ArgumentParser(description="DGA of Shiotob")
     parser.add_argument("domain", help="initial domain")
+    parser.add_argument("-n", "--nr", type=int, default=2001, help="number of domains")
     args = parser.parse_args()
     domain = args.domain
-    for i in range(2001):
+    for i in range(args.nr):
         print(domain)
         domain = get_next_domain(domain)
 

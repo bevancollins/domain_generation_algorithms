@@ -25,8 +25,9 @@ def dga(r):
 if __name__=="__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("seed", help="e.g. DEADBEEF")
+    parser.add_argument("-n", "--nr", type=int, default=96, help="number of domains")
     args = parser.parse_args()
     r = Rand(int(args.seed, 16))
-    for nr in range(96):
+    for nr in range(args.nr):
         dga(r)
 

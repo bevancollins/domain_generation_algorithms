@@ -13,10 +13,10 @@ def prng(seed_string):
 
     return result.value
 
-def dga(seed, d):
+def dga(seed, d, nr):
     tlds = ["cc", "co", "eu"]
     dga_domains = []
-    for i in range(10):
+    for i in range(nr):
         for j, tld in enumerate(tlds):
             ss = ".".join([str(s) for s in [seed, d.month, d.day, d.year, tld]])
             r = abs(prng(ss)) + i
@@ -33,9 +33,10 @@ if __name__=="__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-s", "--seed", help="seed", default="OK")
     parser.add_argument("-d", "--date", help="date for which to generate domains")
+    parser.add_argument("-n", "--nr", type=int, default=10, help="number of domains")
     args = parser.parse_args()
     
     d = datetime.strptime(args.date, "%Y-%m-%d") if args.date else datetime.now()
 
-    for domain in dga(args.seed, d):
+    for domain in dga(args.seed, d, args.nr):
         print(domain)

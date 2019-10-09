@@ -7,6 +7,7 @@
 
 
 import random
+import argparse
 
 class Mersenne:
 
@@ -74,12 +75,16 @@ def randint(mersenne, nr):
     x = mersenne.extract_number()
     return (nr*x) >> 32
 
+parser = argparse.ArgumentParser()
+parser.add_argument("-n", "--nr", type=int, default=100, help="number of domains")
+args = parser.parse_args()
+
 charset = "iHRYg79zJXaGw1CF5K0d3vZobhAlx6StUBnjOIMpe2yVuPr4sL8DqmQTkEcWNf"
 seed = random.randint(0, 1000*3600*24) 
 
 if __name__ == "__main__":
     mersenne = Mersenne(seed)
-    for nr in range(100):
+    for nr in range(args.nr):
         domain = ""
         for i in range(10):
             c = charset[randint(mersenne, len(charset))]

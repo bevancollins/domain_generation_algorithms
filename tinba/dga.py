@@ -1,4 +1,5 @@
 from __future__ import print_function
+import argparse
 
 
 def dga(seed, domain, tlds, num_domains):
@@ -31,16 +32,20 @@ def dga(seed, domain, tlds, num_domains):
 if __name__ == '__main__':
     # There are several Tinba variants.  This describes those variations and
     # source references for each.
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-n", "--nr", type=int, default=100, help="number of domains")
+    args = parser.parse_args()
+
     dga_configurations = [
         # http://garage4hackers.com/entry.php?b=3086
-        ('oGkS3w3sGGOGG7oc', 'ssrgwnrmgrxe.com', ('com',), 1000),
+        ('oGkS3w3sGGOGG7oc', 'ssrgwnrmgrxe.com', ('com',), args.nr),
         # https://johannesbader.ch/2015/04/new-top-level-domains-for-tinbas-dga
-        ('jc74FlUna852Ji9o', 'blackfreeqazyio.cc', ('com', 'net', 'in', 'ru'), 100),
+        ('jc74FlUna852Ji9o', 'blackfreeqazyio.cc', ('com', 'net', 'in', 'ru'), args.nr),
         # https://www.sophos.com/en-us/threat-center/threat-analyses/viruses-and-spyware/Troj~Tinba-EL/detailed-analysis.aspx
         # https://github.com/baderj/domain_generation_algorithms/commit/c7d154a39bb172c4632f7565e0c9380e8b36c18e
-        ('yqokqFC2TPBFfJcG', 'watchthisnow.xyz', ('pw', 'us', 'xyz', 'club'), 100),
+        ('yqokqFC2TPBFfJcG', 'watchthisnow.xyz', ('pw', 'us', 'xyz', 'club'), args.nr),
         # https://github.com/baderj/domain_generation_algorithms/commit/c7d154a39bb172c4632f7565e0c9380e8b36c18e
-        ('j193HsnW72Yqns7u', 'j193hsne720uie8i.cc', ('com', 'net', 'biz', 'org'), 100),
+        ('j193HsnW72Yqns7u', 'j193hsne720uie8i.cc', ('com', 'net', 'biz', 'org'), args.nr),
     ]
 
 

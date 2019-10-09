@@ -58,10 +58,11 @@ if __name__=="__main__":
     parser.add_argument("-t", "--tld", choices=[1,2], type=int,
             help="tld set", default=1)
     parser.add_argument('-s', '--seed', choices=['a','b'], default='a')
+    parser.add_argument("-n", "--nr", type=int, default=1000, help="number of domains")
     args = parser.parse_args()
     if args.date:
         d = datetime.strptime(args.date, "%Y-%m-%d")
     else:
         d = datetime.now()
-    for domain in get_domains(1000, d, args.seed, args.tld):
+    for domain in get_domains(args.nr, d, args.seed, args.tld):
         print(domain)

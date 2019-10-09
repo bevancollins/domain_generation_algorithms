@@ -1,3 +1,9 @@
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-n", "--nr", type=int, default=1000, help="number of domains")
+args = parser.parse_args()
+
 length = 7
 tld = "com"
 key = "1676d5775e05c50b46baa5579d4fc7"
@@ -10,7 +16,7 @@ step = 0
 for m in key:
     step += ord(m)
 
-for nr in range(1000):
+for nr in range(args.nr):
     domain = ""
     base += step
 

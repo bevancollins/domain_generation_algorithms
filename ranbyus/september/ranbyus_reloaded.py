@@ -47,10 +47,10 @@ def pcg_random(r):
     data[12:16] = to_little_array(d)
     return step3 & 0xFFFFFFFFFFFFFFFF, data
 
-def dga(year, month, day, seed):
+def dga(year, month, day, seed, nr):
     x = (day*month*year) ^ seed
     tld_index = day
-    for _ in range(40):
+    for _ in range(nr):
         random = 32*[None]
         x, random[0:16] = pcg_random(x)
         x, random[16:32] = pcg_random(x)
@@ -70,10 +70,11 @@ if __name__=="__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-d", "--date", help="date for which to generate domains")
     parser.add_argument("-s", "--seed", help="seed as hex string", default="0F0D5BFA")
+    parser.add_argument("-n", "--nr", type=int, default=40, help="number of domains")
     args = parser.parse_args()
     if args.date:
         d = datetime.strptime(args.date, "%Y-%m-%d")
     else:
         d = datetime.now()
-    for domain in dga(d.year, d.month, d.day, int(args.seed, 16)):
+    for domain in dga(d.year, d.month, d.day, int(args.seed, 16), args.nr):
         print(domain)

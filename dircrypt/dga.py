@@ -25,6 +25,7 @@ def get_domains(seed, nr):
 if __name__=="__main__":
     parser = argparse.ArgumentParser(description="generate Dircrypt domains")
     parser.add_argument("seed", help="seed as hex")
+    parser.add_argument("-n", "--nr", type=int, default=30, help="number of domains")
     args = parser.parse_args()
-    for domain in get_domains(int(args.seed, 16), 30):
+    for domain in get_domains(int(args.seed, 16), args.nr):
         print(domain)

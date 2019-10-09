@@ -24,9 +24,10 @@ def dga(r):
 if __name__=="__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("seed", type=int)
+    parser.add_argument("-n", "--nr", type=int, default=5, help="number of domains")
     args = parser.parse_args()
     r = Rand()
     r.srand(args.seed)
-    for _ in range(5):
+    for _ in range(args.nr):
         print(dga(r))
     

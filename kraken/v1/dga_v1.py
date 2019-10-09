@@ -49,6 +49,7 @@ def get_domains(nr, seed_set):
 if __name__=="__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('-s', '--seed', choices=['a','b'], default='a')
+    parser.add_argument("-n", "--nr", type=int, default=1000, help="number of domains")
     args = parser.parse_args()
-    for domain in get_domains(1000, args.seed):
+    for domain in get_domains(args.nr, args.seed):
         print(domain)
